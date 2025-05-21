@@ -1,0 +1,78 @@
+<div class="min-h-screen bg-gradient-to-b from-blue-50 to-white flex flex-col items-center p-6">
+  <div class="w-full max-w-md">
+    <!-- Encabezado -->
+    <div class="mb-8 text-center">
+      <h1 class="text-3xl font-bold text-blue-800 mb-2">¡Tienes tu nueva tarjeta de débito!</h1>
+      <p class="text-gray-600">Tu tarjeta virtual es pura libertad y control financiero</p>
+    </div>
+
+    <!-- Tarjeta Virtual -->
+    <div class="relative mb-8">
+      <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 shadow-xl h-48 flex flex-col justify-between text-white">
+        <!-- Logo y nombre -->
+        <div class="flex justify-between items-start">
+          <div>
+            <h2 class="text-xl font-bold">SecurePay</h2>
+            <p class="text-blue-200 text-sm">Tarjeta Virtual</p>
+          </div>
+          <div class="bg-yellow-400 rounded-full p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Número de tarjeta -->
+        <div class="mb-2">
+          <p class="text-blue-200 text-xs mb-1">Número de tarjeta</p>
+          <div class="flex space-x-4">
+            <span class="tracking-widest">••••</span>
+            <span class="tracking-widest">••••</span>
+            <span class="tracking-widest">••••</span>
+            <span class="tracking-widest">1234</span>
+          </div>
+        </div>
+
+        <!-- Información adicional -->
+        <div class="flex justify-between">
+          <div>
+            <p class="text-blue-200 text-xs mb-1">Titular</p>
+            <p class="text-sm">TU NOMBRE</p>
+          </div>
+          <div>
+            <p class="text-blue-200 text-xs mb-1">Válida hasta</p>
+            <p class="text-sm">••/••</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón para mostrar/ocultar número -->
+      <div class="absolute -bottom-4 left-0 right-0 flex justify-center">
+        <button class="bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold px-6 py-2 rounded-full shadow-md transition duration-200 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+          </svg>
+          Ver tarjeta virtual
+        </button>
+      </div>
+    </div>
+
+    <!-- Descripción -->
+    <div class="bg-blue-100 rounded-xl p-4 mb-8">
+      <p class="text-blue-800 text-center">
+        Puedes borrarla y crearla de nuevo todas las veces que quieras.
+      </p>
+    </div>
+
+    <!-- Acciones -->
+    <div class="space-y-4">
+      <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200">
+        Configurar tarjeta
+      </button>
+      <button class="w-full border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-3 px-4 rounded-lg transition duration-200">
+        Borrar tarjeta
+      </button>
+    </div>
+  </div>
+</div>
