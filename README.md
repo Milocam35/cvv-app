@@ -4,13 +4,19 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## Development server
 
+To install the Angular cli first run this command:
+
+```bash
+npm install -g @angular/cli
+```
+
 To start a local development server, run:
 
 ```bash
-ng serve
+ng serve --open
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Once the server is running, the app will open automatically, if not, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
 ## Code scaffolding
 
