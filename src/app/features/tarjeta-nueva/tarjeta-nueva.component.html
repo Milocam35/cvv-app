@@ -1,0 +1,46 @@
+<div class="min-h-screen bg-blue-50 flex flex-col items-center justify-center p-4">
+    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+      
+      <!-- Nuevo encabezado -->
+      <div class="flex flex-col items-center mb-8">
+        <h1 class="text-2xl font-bold text-blue-800">Tarjeta Nueva</h1>
+        <p class="text-blue-600">Crea una tarjeta temporal para mayor seguridad</p>
+      </div>
+  
+      <!-- Título -->
+      <h2 class="text-xl font-semibold text-center text-blue-800 mb-6">Crear tarjeta temporal</h2>
+  
+      <!-- Campo de nombre -->
+      <div class="mb-6">
+        <label for="cardName" class="block text-sm font-medium text-blue-800 mb-2">Nombre para la tarjeta</label>
+        <input 
+          type="text" 
+          id="cardName" 
+          placeholder="Ej: Compras Online, Netflix, etc."
+          class="w-full p-4 border-2 border-blue-200 rounded-lg focus:border-yellow-400 focus:ring-2 focus:ring-yellow-200 outline-none transition duration-200"
+          maxlength="30"
+        >
+        <p class="text-xs text-gray-500 mt-1">Máximo 30 caracteres</p>
+      </div>
+  
+      <!-- Información -->
+      <div class="bg-blue-100 p-4 rounded-lg mb-6">
+        <h3 class="font-bold text-blue-800 mb-1">TARJETA TEMPORAL</h3>
+        <p class="text-blue-700 text-sm">
+          Esta tarjeta tendrá un número y CVV diferente a tu tarjeta principal. 
+          Ideal para compras en línea con mayor seguridad y un mejor manejo de tu dunero.
+        </p>
+      </div>
+      <!-- Botón -->
+      <button 
+        (click)="createCard()"
+        [disabled]="!cardName || cardName.length < 3"
+        [class.opacity-50]="!cardName || cardName.length < 3"
+        [class.cursor-not-allowed]="!cardName || cardName.length < 3"
+        class="w-full bg-yellow-400 hover:bg-yellow-500 text-blue-800 font-bold py-3 px-4 rounded-lg transition duration-200"
+      >
+        Crear Tarjeta
+      </button>
+    </div>
+  </div>
+  

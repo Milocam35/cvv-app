@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TarjetaItemComponent } from './tarjeta-item/tarjeta-item.component';
+import { RouterModule } from '@angular/router';
 
 export interface VirtualCard {
   id: string;
@@ -14,12 +15,13 @@ export interface VirtualCard {
   frozen: boolean;
   showCvv: boolean;
   createdAt: Date;
+  holder?: string;
 }
 
 @Component({
   selector: 'app-tarjetas',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, TarjetaItemComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, TarjetaItemComponent, RouterModule],
   templateUrl: './tarjetas.component.html',
 })
 export class TarjetasComponent {
@@ -33,7 +35,8 @@ export class TarjetasComponent {
       amount: 1000000,
       frozen: false,
       showCvv: false,
-      createdAt: new Date()
+      createdAt: new Date(),
+      holder: 'JUAN PEREZ'
     },
     {
       id: '2',
@@ -44,7 +47,8 @@ export class TarjetasComponent {
       amount: 500000,
       frozen: true,
       showCvv: false,
-      createdAt: new Date()
+      createdAt: new Date(),
+      holder: 'JUAN PEREZ'
     }
   ];
 

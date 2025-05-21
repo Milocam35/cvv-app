@@ -1,0 +1,123 @@
+<div class="min-h-screen bg-gray-50 p-4 md:p-8">
+    <div class="max-w-md mx-auto">
+      <a
+        routerLink="/tarjetas"
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium mb-4"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Volver
+      </a>
+      <!-- Tarjeta Completa -->
+      <div class="relative mb-8">
+        <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 shadow-xl h-56 flex flex-col justify-between text-white">
+          
+          <!-- Logo y nombre -->
+          <div class="flex justify-between items-start">
+            <div class="mt-2">
+              <h2 class="text-xl font-bold">{{ card?.alias || 'Compras Online' }}</h2>
+              <p class="text-blue-200 text-sm">Tarjeta Virtual</p>
+            </div>
+            <div class="bg-yellow-400 rounded-full p-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+              </svg>
+            </div>
+          </div>
+  
+          <!-- Número de tarjeta completo -->
+          <div class="mb-4">
+            <p class="text-blue-200 text-xs mb-1">Número de tarjeta</p>
+            <div class="flex space-x-4 tracking-widest text-lg">
+              <span>4231567890123456</span>
+            </div>
+          </div>
+  
+          <!-- Información adicional -->
+          <div class="flex justify-between items-end">
+            <div>
+              <p class="text-blue-200 text-xs mb-1">Titular</p>
+              <p class="text-sm uppercase">{{ card?.holder || 'JUAN PEREZ' }}</p>
+            </div>
+            <div>
+              <p class="text-blue-200 text-xs mb-1">Válida hasta</p>
+              <p class="text-sm">{{ card?.expiryDate || '12/25' }}</p>
+            </div>
+            <div>
+              <p class="text-blue-200 text-xs mb-1 flex items-center gap-2 cursor-pointer" (click)="toggleCvv()">
+                CVV
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </p>
+              <p class="text-sm tracking-widest">
+                {{ showCvv ? (card?.cvv || '123') : '•••' }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Saldo Actual -->
+      <div class="bg-white rounded-xl p-6 shadow-sm mb-6 text-center">
+        <p class="text-gray-500 text-sm mb-1">Saldo disponible</p>
+        <p class="text-3xl font-bold text-blue-800"> 150000</p>
+      </div>
+  
+      <!-- Controles de monto -->
+      <div class="bg-white rounded-xl p-6 shadow-sm mb-6">
+        <div class="flex justify-between items-center mb-4">
+          <button 
+            (click)="adjustAmount(-1000)" 
+            class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-full transition-colors"
+          >
+            -
+          </button>
+          
+          <div class="text-center flex-1 mx-4">
+            <p class="text-gray-500 text-sm">Monto a {{ operationType === 'add' ? 'añadir' : 'retirar' }}</p>
+            <p class="text-xl font-bold text-blue-800">{{ currentAmount | currency:'COP':'$':'1.0-0' }}</p>
+          </div>
+          
+          <button 
+            (click)="adjustAmount(1000)" 
+            class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-full transition-colors"
+          >
+            +
+          </button>
+        </div>
+  
+        <!-- Selector de operación -->
+        <div class="flex border rounded-lg overflow-hidden">
+          <button 
+            [class.bg-blue-600]="operationType === 'add'"
+            [class.text-white]="operationType === 'add'"
+            [class.bg-gray-100]="operationType !== 'add'"
+            (click)="operationType = 'add'" 
+            class="flex-1 py-2 px-4 font-medium transition-colors"
+          >
+            Añadir
+          </button>
+          <button 
+            [class.bg-blue-600]="operationType === 'withdraw'"
+            [class.text-white]="operationType === 'withdraw'"
+            [class.bg-gray-100]="operationType !== 'withdraw'"
+            (click)="operationType = 'withdraw'" 
+            class="flex-1 py-2 px-4 font-medium transition-colors"
+          >
+            Retirar
+          </button>
+        </div>
+      </div>
+  
+      <!-- Botón de confirmación -->
+      <button 
+        (click)="confirmOperation()"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-lg font-bold text-lg transition-colors"
+      >
+        Confirmar {{ operationType === 'add' ? 'Añadir' : 'Retiro' }}
+      </button>
+    </div>
+  </div>

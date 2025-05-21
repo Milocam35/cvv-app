@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { VirtualCard } from '../tarjetas.component';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router'; // Añadir esta importación
 
 @Component({
   selector: 'app-tarjeta-item',
@@ -12,6 +13,8 @@ export class TarjetaItemComponent {
   @Input() card!: VirtualCard;
   @Output() delete = new EventEmitter<string>();
   @Output() freeze = new EventEmitter<string>();
+
+  constructor(private router: Router) {} // Inyectar Router
 
   toggleCvv(): void {
     this.card.showCvv = !this.card.showCvv;
@@ -30,5 +33,10 @@ export class TarjetaItemComponent {
 
   onFreeze(): void {
     this.freeze.emit(this.card.id);
+  }
+
+  // Nuevo método para navegar a la ruta 'tarjeta'
+  navigateToCard(): void {
+    this.router.navigate(['/tarjeta']);
   }
 }
