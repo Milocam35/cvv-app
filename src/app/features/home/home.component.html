@@ -1,13 +1,14 @@
 <!-- Main Content - Dashboard bancario -->
 <main class="flex-1 flex flex-col bg-white">
+  <app-header></app-header>
   <!-- Banner promocional -->
   <div class="bg-white rounded-xl shadow-sm mx-4 my-3 p-4 flex items-center">
-    <div class="bg-purple-100 rounded-full p-2 mr-3">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <div class="bg-blue-100 rounded-full p-2 mr-3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
       </svg>
     </div>
-    <span class="text-purple-600 flex-grow">Envía dinero al instante con tus llaves</span>
+    <span class="text-blue-700 flex-grow">Envía dinero al instante con tus llaves</span>
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
     </svg>
@@ -54,7 +55,7 @@
         </svg>
       </div>
       <span class="text-sm text-center">Tus llaves</span>
-      <span class="absolute -top-1 right-3 bg-purple-600 text-white text-xs px-2 py-0.5 rounded-full">Nuevo</span>
+      <span class="absolute -top-1 right-3 bg-yellow-500 text-white text-xs px-2 py-0.5 rounded-full">Nuevo</span>
     </div>
     
     <!-- Pagar servicios -->
@@ -65,7 +66,7 @@
         </svg>
       </div>
       <span class="text-sm text-center">Pagar servicios</span>
-      <span class="absolute -top-1 right-0 bg-purple-600 text-white text-xs px-2 py-0.5 rounded-full">Nuevo</span>
+      <span class="absolute -top-1 right-0 bg-yellow-500 text-white text-xs px-2 py-0.5 rounded-full">Nuevo</span>
     </div>
   </div>
   
@@ -90,14 +91,14 @@
           <p class="text-sm text-gray-600">y aumenta la seguridad de tu cuenta.</p>
         </div>
       </div>
-      <div class="bg-purple-100 p-2 rounded-lg">
-        <div class="w-3 h-6 bg-purple-600 rounded-full"></div>
+      <div class="bg-yellow-100 p-2 rounded-lg">
+        <div class="w-3 h-6 bg-yellow-500 rounded-full"></div>
       </div>
     </div>
     
     <!-- Navegación en slide -->
     <div class="flex justify-center py-2 space-x-1">
-      <div class="w-2 h-2 rounded-full bg-purple-600"></div>
+      <div class="w-2 h-2 rounded-full bg-blue-500"></div>
       <div class="w-2 h-2 rounded-full bg-gray-300"></div>
     </div>
     
@@ -117,10 +118,11 @@
     <!-- Carrusel de promociones (solo la primera visible) -->
     <div class="relative overflow-hidden">
       <img 
-    src="src/assets/sales.jpg"
+    src="assets/sales.jpg"
     alt="Promoción"
     class="object-cover w-full h-32 rounded-xl"
   />
     </div>
   </div>
+  <app-footer></app-footer>
 </main>
