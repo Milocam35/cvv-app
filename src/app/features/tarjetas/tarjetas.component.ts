@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TarjetaItemComponent } from './tarjeta-item/tarjeta-item.component';
 import { RouterModule } from '@angular/router';
+import { TarjetaItemComponent } from './tarjeta-item/tarjeta-item.component';
 
 export interface VirtualCard {
   id: string;
@@ -21,7 +19,7 @@ export interface VirtualCard {
 @Component({
   selector: 'app-tarjetas',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, TarjetaItemComponent, RouterModule],
+  imports: [CommonModule, RouterModule, TarjetaItemComponent],
   templateUrl: './tarjetas.component.html',
 })
 export class TarjetasComponent {
@@ -52,70 +50,6 @@ export class TarjetasComponent {
     }
   ];
 
-  showAddCardModal = false;
-  cardForm: FormGroup;
-  presetAmounts = [100000, 500000, 1000000];
-
-  constructor(private fb: FormBuilder) {
-    this.cardForm = this.fb.group({
-      alias: [''],
-      amount: [null, [Validators.required, Validators.min(10000)]],
-      validFor: ['3', Validators.required]
-    });
-  }
-
-  openAddCardModal(): void {
-    this.showAddCardModal = true;
-  }
-
-  closeAddCardModal(): void {
-    this.showAddCardModal = false;
-    this.cardForm.reset({
-      validFor: '3'
-    });
-  }
-
-  setAmount(amount: number): void {
-    this.cardForm.patchValue({ amount });
-  }
-
-  onSubmit(): void {
-    if (this.cardForm.valid) {
-      const formValue = this.cardForm.value;
-      
-      const newCard: VirtualCard = {
-        id: Math.random().toString(36).substring(2, 9),
-        alias: formValue.alias,
-        lastFourDigits: Math.floor(1000 + Math.random() * 9000).toString(),
-        cvv: Math.floor(100 + Math.random() * 900).toString(),
-        expiryDate: this.generateExpiryDate(formValue.validFor),
-        amount: formValue.amount,
-        frozen: false,
-        showCvv: false,
-        createdAt: new Date()
-      };
-      
-      this.cards.unshift(newCard);
-      this.closeAddCardModal();
-    }
-  }
-
-  private generateExpiryDate(months: string): string {
-    const date = new Date();
-    date.setMonth(date.getMonth() + parseInt(months));
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear().toString().slice(-2);
-    return `${month}/${year}`;
-  }
-
-  formatMoney(amount: number): string {
-    return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
-      minimumFractionDigits: 0
-    }).format(amount);
-  }
-
   onCardDeleted(cardId: string): void {
     this.cards = this.cards.filter(c => c.id !== cardId);
   }
@@ -125,5 +59,13 @@ export class TarjetasComponent {
     if (card) {
       card.frozen = !card.frozen;
     }
+  }
+
+  formatMoney(amount: number): string {
+    return new Intl.NumberFormat('es-CO', {
+      style: 'currency',
+      currency: 'COP',
+      minimumFractionDigits: 0
+    }).format(amount);
   }
 }

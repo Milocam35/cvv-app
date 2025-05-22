@@ -1,140 +1,79 @@
 <div class="min-h-screen bg-white p-4 md:p-8">
-    <div class="max-w-3xl mx-auto">
-      <!-- Botón de retroceso -->
-      <a
-        routerLink="/"
-        class="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium mb-4"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-        Volver
-      </a>
-      <!-- Header -->
-      <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl md:text-3xl font-bold text-blue-800">Tus Tarjetas Virtuales</h1>
-        <button
-          (click)="openAddCardModal()"
+  <div class="max-w-3xl mx-auto">
+    <!-- Botón de retroceso -->
+    <a
+      routerLink="/"
+      class="inline-flex items-center text-blue-600 hover:text-blue-800 text-sm font-medium mb-4"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      Volver
+    </a>
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-2xl md:text-3xl font-bold text-blue-800">Tus Tarjetas Virtuales</h1>
+      <div class="flex gap-2">
+        <a
+          routerLink="/historial"
+          class="flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-600 transition-colors"
+          title="Ver historial"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+        </a>
+        <a
+          routerLink="/tarjeta-nueva"
           class="hidden md:flex items-center gap-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
           </svg>
           Nueva Tarjeta
-        </button>
+        </a>
       </div>
-  
-      <!-- Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <app-tarjeta-item
-          *ngFor="let card of cards"
-          [card]="card"
-          (delete)="onCardDeleted($event)"
-          (freeze)="onCardFrozen($event)"
-        ></app-tarjeta-item>
-      </div>
-  
-      <!-- Empty State -->
-      <div *ngIf="cards.length === 0" class="bg-blue-50 rounded-xl p-8 text-center shadow-sm mt-8 border border-blue-200">
-        <div class="mx-auto w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-          </svg>
-        </div>
-        <h3 class="text-lg font-semibold text-blue-800 mb-2">No tienes tarjetas virtuales</h3>
-        <p class="text-blue-600 mb-4">Crea tu primera tarjeta virtual para compras seguras en línea</p>
-        <button
-          (click)="openAddCardModal()"
-          class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
-          </svg>
-          Crear Tarjeta Virtual
-        </button>
-      </div>
-  
-      <!-- + Añadir Tarjeta (estilo sutil abajo) -->
-      <div class="mt-10 text-center">
-        <button
-          (click)="openAddCardModal()"
-          class="text-blue-700 hover:text-blue-900 text-sm font-medium transition"
-        >
-          + Añadir tarjeta
-        </button>
-      </div>
-  
     </div>
-  
-    <!-- Add Card Modal -->
-    <div *ngIf="showAddCardModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div class="bg-white rounded-xl w-full max-w-md p-6 shadow-xl">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="text-xl font-bold text-blue-800">Nueva Tarjeta Virtual</h3>
-          <button (click)="closeAddCardModal()" class="text-gray-400 hover:text-gray-600">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-  
-        <form [formGroup]="cardForm" (ngSubmit)="onSubmit()" class="space-y-4">
-          <div>
-            <label for="alias" class="block text-sm font-medium text-gray-700">Alias (opcional)</label>
-            <input
-              id="alias"
-              type="text"
-              formControlName="alias"
-              placeholder="Ej: Compras Online"
-              class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-            >
-          </div>
-  
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Límite de gasto</label>
-            <div class="grid grid-cols-3 gap-2 mt-1">
-              <button
-                *ngFor="let amount of presetAmounts"
-                type="button"
-                (click)="setAmount(amount)"
-                [class.bg-blue-100]="cardForm.get('amount')?.value === amount"
-                class="border border-gray-300 rounded-lg py-2 text-sm hover:bg-gray-50 transition"
-              >
-                {{formatMoney(amount)}}
-              </button>
-            </div>
-            <input
-              type="number"
-              formControlName="amount"
-              placeholder="O ingresa un monto personalizado"
-              class="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-            >
-          </div>
-  
-          <div>
-            <label class="block text-sm font-medium text-gray-700">Válida por</label>
-            <select
-              formControlName="validFor"
-              class="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-            >
-              <option value="1">1 mes</option>
-              <option value="3">3 meses</option>
-              <option value="6">6 meses</option>
-              <option value="12">12 meses</option>
-            </select>
-          </div>
-  
-          <div class="pt-4">
-            <button
-              type="submit"
-              [disabled]="cardForm.invalid"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed transition"
-            >
-              Crear Tarjeta
-            </button>
-          </div>
-        </form>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <app-tarjeta-item
+        *ngFor="let card of cards"
+        [card]="card"
+        (delete)="onCardDeleted($event)"
+        (freeze)="onCardFrozen($event)"
+      ></app-tarjeta-item>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="cards.length === 0" class="bg-blue-50 rounded-xl p-8 text-center shadow-sm mt-8 border border-blue-200">
+      <div class="mx-auto w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+        </svg>
       </div>
+      <h3 class="text-lg font-semibold text-blue-800 mb-2">No tienes tarjetas virtuales</h3>
+      <p class="text-blue-600 mb-4">Crea tu primera tarjeta virtual para compras seguras en línea</p>
+      <a
+        routerLink="/tarjeta-nueva"
+        class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+        </svg>
+        Crear Tarjeta Virtual
+      </a>
+    </div>
+
+    <!-- + Añadir Tarjeta (estilo sutil abajo) -->
+    <div class="mt-10 text-center">
+      <a
+        routerLink="/tarjeta-nueva"
+        class="text-blue-700 hover:text-blue-900 text-sm font-medium transition"
+      >
+        + Añadir tarjeta
+      </a>
     </div>
   </div>
-  
+</div>
